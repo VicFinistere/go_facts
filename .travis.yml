@@ -5,13 +5,10 @@ branches:
   only:
     - staging
 
-before_script:
-  - pip install -r requirements.txt
+before_script: pip install -r requirements.txt
 
 env: DJANGO_SETTINGS_MODULE="gofacts_project.settings.travis"
 
-services:
-  - postgresql
+services: postgresql
 
-script:
-  - python3 manage.py test
+script: python3 manage.py test
