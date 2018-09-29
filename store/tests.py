@@ -95,7 +95,7 @@ class FetchProductsIdTestCase(TestCase):
 
     def setUp(self):
         product = 'Nutella'
-        self.url = f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={product}"
+        self.url = "https://fr.openfoodfacts.org/cgi/search.pl?search_terms={}".format(product)
 
     def test_fetch_products_id(self):
         """
@@ -318,15 +318,19 @@ class FetchSubstitutesTestCase(TestCase):
         category = 'fr:ratatouilles'
         grade = 'a'
 
-        api_search = "https://fr.openfoodfacts.org/cgi/search.pl?action=process"
-        category_as_first_filter = "&tagtype_0=categories&tag_contains_0=contains"
-        grade_as_second_filter = "tagtype_1=nutrition_grades&tag_contains_1=contains"
-        url_params = '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n'
-        display_method = "action=display"
+        self.url = "{}{}&tag_0={}&{}&tag_1={}{}&{}".format(
+            "https://fr.openfoodfacts.org/cgi/search.pl?action=process",
 
-        self.url = f"{api_search}{category_as_first_filter}&tag_0={category}" \
-                   f"&{grade_as_second_filter}&tag_1={grade}{url_params}" \
-                   f"&{display_method}"
+            "&tagtype_0=categories&tag_contains_0=contains",
+
+            category,
+
+            "tagtype_1=nutrition_grades&tag_contains_1=contains",
+
+            grade,
+
+            '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n',
+            "action=display")
 
     def test_fetch_substitutes(self):
         """
@@ -358,15 +362,19 @@ class UrlCategoryTestCase(TestCase):
         category = 'fr:ratatouilles'
         grade = 'a'
 
-        api_search = "https://fr.openfoodfacts.org/cgi/search.pl?action=process"
-        category_as_first_filter = "&tagtype_0=categories&tag_contains_0=contains"
-        grade_as_second_filter = "tagtype_1=nutrition_grades&tag_contains_1=contains"
-        url_params = '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n'
-        display_method = "action=display"
+        self.url = "{}{}&tag_0={}&{}&tag_1={}{}&{}".format(
+            "https://fr.openfoodfacts.org/cgi/search.pl?action=process",
 
-        self.url = f"{api_search}{category_as_first_filter}&tag_0={category}" \
-                   f"&{grade_as_second_filter}&tag_1={grade}{url_params}" \
-                   f"&{display_method}"
+            "&tagtype_0=categories&tag_contains_0=contains",
+
+            category,
+
+            "tagtype_1=nutrition_grades&tag_contains_1=contains",
+
+            grade,
+
+            '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n',
+            "action=display")
 
     def test_url_category_for_grade(self):
         """
