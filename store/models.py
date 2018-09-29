@@ -23,9 +23,6 @@ class Product(models.Model):
     nutriments = models.TextField(max_length=1500)
     code = models.CharField(max_length=30)
 
-    def __str__(self):
-        return f"{self.name, self.grade}"
-
 
 class Favorite(models.Model):
     """Model used to stock the favorites products of an user"""
@@ -33,6 +30,3 @@ class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default='', related_name='product')
     substitute = models.ForeignKey(Product, on_delete=models.CASCADE, default='', related_name='substitute')
-
-    def __str__(self):
-        return self.user
