@@ -1,5 +1,4 @@
 """Models used for the application"""
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -26,7 +25,6 @@ class Product(models.Model):
 
 class Favorite(models.Model):
     """Model used to stock the favorites products of an user"""
-    User = get_user_model()
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default='', related_name='product')
     substitute = models.ForeignKey(Product, on_delete=models.CASCADE, default='', related_name='substitute')
