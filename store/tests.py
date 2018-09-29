@@ -69,7 +69,6 @@ class UserListTestCase(TestCase):
         for user in users:
             if user.id == 1:
                 response = logic.create_user_list(self.user_0)
-                print(f"Response : {response}")
 
 
 class GetIdTestCase(TestCase):

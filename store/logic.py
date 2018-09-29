@@ -59,7 +59,6 @@ def get_products_id(product):
         # logging.info(products_id)
         return products_id
     except KeyError:
-        print(f"It doesn't work with {product} (get_product:logic)")
         logging.error(f"It doesn't work with %s (get_product:logic)", product)
         return None
 
@@ -70,8 +69,6 @@ def search_product(products_id):
     :param products_id: Requested product(s)
     :return: Product array : name, code, grade, image, categories, nutriments
     """
-    print(f"Getting {products_id} ...")
-
     products_id = get_products_id(products_id)
 
     i = 0
@@ -181,13 +178,11 @@ def in_database(product_id):
     stored_product = Product.objects.filter(code=product_id).count()
 
     if stored_product == 1:
-        print(f"The product is already in database : {product_id} (logic)")
         logging.info(f"The product is already in database : %s (logic)", product_id)
         return Product.objects.get(code=product_id)
 
     elif stored_product > 1:
         while stored_product > 1:
-            print(f"The product seems to have more than one existence")
             logging.warning(f"The product seems to have more than one existence")
             print("Destroy...")
             Product.objects.filter(code=product_id).delete()

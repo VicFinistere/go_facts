@@ -125,7 +125,6 @@ def product_page(request, product_code):
     :param product_code:
     :return: Page product
     """
-    print(f"This will be the page for : {product_code}")
     product = product_code
 
     if product:
@@ -171,7 +170,6 @@ def profile_page(request):
     """
 
     query_user = User.objects.filter(id=request.user.id)
-    print(f" Query user : {query_user}")
     if query_user.exists():
         user = User.objects.get(id=request.user.id)
         Profile.objects.get_or_create(user=query_user[0])
@@ -254,19 +252,16 @@ def save_products_pair(request, product_code, substitute_code):
 
     if product_code and substitute_code:
 
-        print(f"Saving {substitute_code} and {product_code} ")
         # Get both products
         product_array = logic.get_product_array(product_code)
         substitute_array = logic.search_product(substitute_code)
 
         product_is_saved = False
         if product_array is not None:
-            print(f"product_array : {product_array}")
             product_is_saved = logic.save_product(product_array)
 
         substitute_is_saved = False
         if substitute_array is not None:
-            print(f"substitute_array : {substitute_array}")
             substitute_is_saved = logic.save_product(substitute_array)
 
         stared = False
