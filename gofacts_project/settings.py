@@ -87,8 +87,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gofacts',
         'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',
+        'PASSWORD': 'P0rt1she@d',
+        'HOST': 'localhost',
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,
     }
