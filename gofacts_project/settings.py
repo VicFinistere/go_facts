@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,17 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
-if os.environ.get('ENV') == 'PRODUCTION':
-    SECRET_KEY = "mS6p+68'zy@9x+,Bw&]'@-J9"
-    ALLOWED_HOSTS = ['pyfoodfacts.herokuapp.com']
-    DEBUG = False
-else:
-    SECRET_KEY = '1pf323uaj#2s8oc#85z7xincioz@qe_gl16cv@lyb^ocyndf!%'
-    DEBUG = True
-    ALLOWED_HOSTS = ['127.0.0.1']
+
+SECRET_KEY = '1pf323uaj#2s8oc#85z7xincioz@qe_gl16cv@lyb^ocyndf!%'
+DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -47,7 +40,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,8 +79,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'gofacts',
         'USER': 'postgres',
-        'PASSWORD': 'P0rt1she@d',
-        'HOST': 'localhost',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '5432',
         'ATOMIC_REQUESTS': True,
     }
@@ -133,19 +125,5 @@ LOGOUT_REDIRECT_URL = 'index'
 
 STATIC_URL = '/static/'
 
-if os.environ.get('ENV') == 'PRODUCTION':
-
-    # Static files settings
-    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
-
-    # Extra places for collectstatic to fgind static files.
-    STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
-    )
-
-    db_from_env = dj_database_url.config(conn_max_age=500)
-    DATABASES['default'].update(db_from_env)
-
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Django debug toolbar
+# INTERNAL_IPS = ['127.0.0.1']
