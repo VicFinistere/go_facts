@@ -7,20 +7,6 @@ import requests
 from .models import Product, Favorite, User
 
 
-def update_database():
-    """
-    Update database
-    :return:
-    """
-
-    products = Product.objects.all()
-
-    for product in products:
-        code = product.code
-        product.delete()
-        get_product(code)
-
-
 def create_user_list(user):
     """
     Create a user list for products page
