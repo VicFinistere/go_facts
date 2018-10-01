@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.urls import reverse_lazy
 from django.views import generic
 
+import logging
 from gofacts_project import settings
 from store import logic
 from .models import Product, Profile
@@ -113,6 +114,7 @@ def search(request, product_code=None):
             'full_result': full_result,
             'substitutes': substitutes
         }
+        logging.info('New search')
         return render(request, 'store/results.html', context)
 
     raise Http404("There is no product for the search")
