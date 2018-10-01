@@ -114,7 +114,7 @@ def search(request, product_code=None):
             'full_result': full_result,
             'substitutes': substitutes
         }
-        logging.info('New search')
+        logging.info('New search for {}'.format(product_name))
         return render(request, 'store/results.html', context)
 
     raise Http404("There is no product for the search")
