@@ -1,6 +1,7 @@
 """
 This file handle daily products update
 """
+import logging
 from store.models import Product
 from store import logic
 
@@ -20,4 +21,5 @@ def update_database():
 
 
 if __name__ == '__main__':
+    logging.info('Updating database products !')
     update_database()
