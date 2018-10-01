@@ -1,5 +1,5 @@
 """
-This file handle daily products update
+This file handle weekly products update
 """
 import logging
 from store.models import Product
