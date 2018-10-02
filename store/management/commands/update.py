@@ -1,12 +1,17 @@
 """
 Cron task to update products in database
 """
+import os
+import django
 from django.core.management.base import BaseCommand
 # from django.core.management.base import CommandError
 # from polls.models import Question as Poll
 import logging
 from store import logic
 from store.models import Product
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gofacts_project.settings.production")
+django.setup()
 
 
 class Command(BaseCommand):
@@ -36,4 +41,3 @@ class Command(BaseCommand):
 
             except ValueError:
                 logging.info("Deleting failed !...")
-
