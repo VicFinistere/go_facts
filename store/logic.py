@@ -2,6 +2,7 @@
 This file contains all the app logic functions ( logic.py )
 """
 import re
+import base64
 import logging
 import requests
 from .models import Product, Favorite, User
@@ -352,7 +353,7 @@ def search_substitutes(category, minimal_grade, product_code):
         while substitutes is None and 5 > i and 97 + i <= ord(minimal_grade) - 1:
             i += 1
             url = url_category_for_grade(category, grade=chr(nutrition_score + i))
-            substitutes = fetch_substitutes(url.encode('utf-8'), product_code)
+            substitutes = fetch_substitutes(base64.b64encode(url), product_code)
         return substitutes
 
     else:
