@@ -86,7 +86,7 @@ def fetch_products_id(url):
     :param url: Page
     :return: products_id
     """
-    data = requests.get(url.encode('utf-8'))
+    data = requests.get(base64.b64encode(url))
     results = data.text
     products_id = re.findall(r'<a href="/produit/(\d+)/', results)
     return products_id
