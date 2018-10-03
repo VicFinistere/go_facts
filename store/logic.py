@@ -415,17 +415,17 @@ def url_category_for_grade(category, grade):
     """
 
     logging.info("Ca s'affiche??")
-
-    url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
-          "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
-          "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
-          "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
-          "&action=display".format(category, grade)
-
-    try:
-        return url
-    except ValueError:
-        return None
+    return True
+    # url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
+    #       "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
+    #       "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
+    #       "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
+    #       "&action=display".format(category, grade)
+    #
+    # try:
+    #     return url
+    # except ValueError:
+    #     return None
 
 
 def int_code(product_code):
