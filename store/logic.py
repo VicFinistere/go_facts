@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*
-
 """
 This file contains all the app logic functions ( logic.py )
 """
@@ -77,8 +75,8 @@ def search_product(products_id):
     while product_array is None and len(products_id) > i:
         product_array = get_product(products_id[i])
         i += 1
-    print(product_array)
-    return product_array
+    print(product_array.encode('utf8'))
+    return product_array.encode('utf8')
 
 
 def fetch_products_id(url):
@@ -370,7 +368,7 @@ def fetch_substitutes(url, product_code):
     """
     substitutes = []
 
-    print(url)
+    print(url.encode('utf8'))
     products_id = fetch_products_id(url)
 
     if products_id:
@@ -420,10 +418,10 @@ def url_category_for_grade(category, grade):
           "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
           "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
           "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
-          "&action=display".format(category, grade)
+          "&action=display".format(category.encode('utf8'), grade)
 
     try:
-        return url
+        return url.encode('utf8')
 
     except ValueError:
         return None
