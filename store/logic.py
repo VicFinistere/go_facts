@@ -368,6 +368,7 @@ def fetch_substitutes(url, product_code):
     """
     substitutes = []
 
+    print(url)
     products_id = fetch_products_id(url)
 
     if products_id:
@@ -413,20 +414,12 @@ def url_category_for_grade(category, grade):
     :return:
     """
 
-    url = "{}{}&tag_0={}&{}&tag_1={}{}&{}".format(
-        "https://fr.openfoodfacts.org/cgi/search.pl?action=process",
-
-        "&tagtype_0=categories&tag_contains_0=contains",
-
-        category,
-
-        "tagtype_1=nutrition_grades&tag_contains_1=contains",
-
-        grade,
-
-        '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n',
-        "action=display")
-
+    url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&" \
+          "tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
+          "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
+          "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
+          "&action=display".format(category, grade)
+    print(url)
     return url
 
 
