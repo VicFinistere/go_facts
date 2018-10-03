@@ -337,11 +337,14 @@ def search_substitutes(category, minimal_grade, product_code):
     :param product_code:
     :return: substitutes
     """
-    url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
-          "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
-          "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
-          "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
-          "&action=display".format(category, minimal_grade)
+
+    url_category_for_grade = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
+                             "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
+                             "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
+                             "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
+                             "&action=display"
+
+    url = url_category_for_grade.format(category, minimal_grade)
 
     # [url, category] = try_url_redirection(url, category)
 
@@ -355,14 +358,9 @@ def search_substitutes(category, minimal_grade, product_code):
         i = -1
 
         while substitutes is None and 5 > i and 97 + i <= ord(minimal_grade) - 1:
-
             i += 1
 
-            url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
-                  "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
-                  "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
-                  "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
-                  "&action=display".format(category, chr(nutrition_score + i))
+            url = url_category_for_grade.format(category, chr(nutrition_score + i))
 
             substitutes = fetch_substitutes(url, product_code)
         return substitutes
