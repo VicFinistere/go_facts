@@ -414,7 +414,6 @@ def url_category_for_grade(category, grade):
     :return: url
     """
 
-    logging.info("1 : {}".format(category))
     logging.info(f"2 : {category}")
     logging.info("3 : {}".format(category.encode('utf-8')))
     url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
