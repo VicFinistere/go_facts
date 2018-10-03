@@ -318,19 +318,11 @@ class FetchSubstitutesTestCase(TestCase):
         category = 'fr:ratatouilles'
         grade = 'a'
 
-        self.url = "{}{}&tag_0={}&{}&tag_1={}{}&{}".format(
-            "https://fr.openfoodfacts.org/cgi/search.pl?action=process",
-
-            "&tagtype_0=categories&tag_contains_0=contains",
-
-            category,
-
-            "tagtype_1=nutrition_grades&tag_contains_1=contains",
-
-            grade,
-
-            '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n',
-            "action=display")
+        self.url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&" \
+                   "tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
+                   "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
+                   "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
+                   "&action=display".format(category, grade)
 
     def test_fetch_substitutes(self):
         """
@@ -362,19 +354,11 @@ class UrlCategoryTestCase(TestCase):
         category = 'fr:ratatouilles'
         grade = 'a'
 
-        self.url = "{}{}&tag_0={}&{}&tag_1={}{}&{}".format(
-            "https://fr.openfoodfacts.org/cgi/search.pl?action=process",
-
-            "&tagtype_0=categories&tag_contains_0=contains",
-
-            category,
-
-            "tagtype_1=nutrition_grades&tag_contains_1=contains",
-
-            grade,
-
-            '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n',
-            "action=display")
+        self.url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&" \
+                   "tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
+                   "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
+                   "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
+                   "&action=display".format(category, grade)
 
     def test_url_category_for_grade(self):
         """
