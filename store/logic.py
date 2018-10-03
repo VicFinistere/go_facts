@@ -368,7 +368,6 @@ def fetch_substitutes(url, product_code):
     """
     substitutes = []
 
-    print(url)
     products_id = fetch_products_id(url)
 
     if products_id:
@@ -428,7 +427,6 @@ def url_category_for_grade(category, grade):
         '&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n',
         "action=display")
 
-    print(url)
     return url
 
 
