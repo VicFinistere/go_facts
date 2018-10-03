@@ -75,8 +75,8 @@ def search_product(products_id):
     while product_array is None and len(products_id) > i:
         product_array = get_product(products_id[i])
         i += 1
-    print(product_array.encode('utf8'))
-    return product_array.encode('utf8')
+    print(product_array)
+    return product_array
 
 
 def fetch_products_id(url):
