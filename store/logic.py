@@ -414,7 +414,9 @@ def url_category_for_grade(category, grade):
     :return: url
     """
 
-    category = category.encode('utf-8')
+    logging.info("1 : {}".format(category))
+    logging.info(f"2 : {category}")
+    logging.info("3 : {}".format(category.encode('utf-8')))
     url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
           "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
           "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
