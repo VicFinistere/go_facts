@@ -337,7 +337,7 @@ def search_substitutes(category, minimal_grade, product_code):
     :param product_code:
     :return: substitutes
     """
-    url = url_category_for_grade(str(category, 'utf-8'), minimal_grade)
+    url = url_category_for_grade(category, minimal_grade)
     # [url, category] = try_url_redirection(url, category)
 
     if url is not None:
@@ -352,7 +352,7 @@ def search_substitutes(category, minimal_grade, product_code):
         while substitutes is None and 5 > i and 97 + i <= ord(minimal_grade) - 1:
             i += 1
             url = url_category_for_grade(category, grade=chr(nutrition_score + i))
-            substitutes = fetch_substitutes(url, product_code)
+            substitutes = fetch_substitutes(url.encode('utf-8'), product_code)
         return substitutes
 
     else:
