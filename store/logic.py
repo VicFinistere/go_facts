@@ -411,7 +411,7 @@ def url_category_for_grade(category, grade):
     Url category for grade
     :param category:
     :param grade:
-    :return:
+    :return: url
     """
 
     url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&" \
@@ -427,7 +427,7 @@ def int_code(product_code):
     """
     Check if code is an integer for template
     :param product_code:
-    :return:
+    :return: int product code
     """
     if not isinstance(product_code, int):
         product_code = int(product_code)
