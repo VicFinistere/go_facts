@@ -367,7 +367,6 @@ def fetch_substitutes(url, product_code):
     """
     substitutes = []
 
-    print(url)
     products_id = fetch_products_id(url)
 
     if products_id:
