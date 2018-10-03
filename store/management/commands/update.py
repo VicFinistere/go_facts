@@ -26,41 +26,81 @@ class Command(BaseCommand):
             # logging.info("Getting {}".format(code))
 
             try:
-                product.delete()
-                # logging.info("Deleting succeed !...")
+                page = "https://world.openfoodfacts.org/api/v0/product/{}.json".format(code)
+                data = requests.get(page).json()
 
-                try:
-                    page = "https://world.openfoodfacts.org/api/v0/product/{}.json".format(code)
-                    data = requests.get(page).json()
+                if data:
+                    if data['product']:
+                        product_page = data['product']
 
-                    if data:
-                        if data['product']:
-                            product = data['product']
-                            try:
-                                product_array = logic.fetch_product_array(product)
+                        try:
 
-                                if product_array is not None:
-                                    logic.save_product(product_array)
-                                else:
-                                    pass
-                                    # logging.info('Getting product array failed...')
+                            product_array = logic.fetch_product_array(product_page)
 
-                            except IndexError:
+                            if product_array is not None:
+                                name, code, grade, image, categories, nutriments = product_array
+
+                                if product.name != name:
+
+                                    try:
+                                        product.name = name
+                                    except ValueError:
+                                        pass
+
+                                if product.code != code:
+
+                                    try:
+                                        product.code = code
+                                    except ValueError:
+                                        pass
+
+                                if product.grade != grade:
+
+                                    try:
+                                        product.grade = grade
+                                    except ValueError:
+                                        pass
+
+                                if product.image != image:
+
+                                    try:
+                                        product.image = image
+                                    except ValueError:
+                                        pass
+
+                                if product.categories != categories:
+
+                                    try:
+                                        product.categories = categories
+                                    except ValueError:
+                                        pass
+
+                                if product.nutriments != nutriments:
+
+                                    try:
+                                        product.nutriments = nutriments
+                                    except ValueError:
+                                        pass
+
+                                product.save()
+
+                            else:
                                 pass
-                                # logging.info('Updating product have failed...')
-                        else:
+                                # logging.info('Product array cannot be fetched ...')
+
+                        except IndexError:
                             pass
-                            # logging.info('No product found with the code {} ...'.format(code))
+                            # logging.info('Updating product have failed...')
                     else:
                         pass
-                        # logging.info('Getting product page failed...')
-
-                except ValueError:
+                        # logging.info('No product found with the code {} ...'.format(code))
+                else:
                     pass
-                    # logging.info("The product has been removed...")
+                    # logging.info('Getting product page failed...')
 
             except ValueError:
                 pass
-                # logging.info("Deleting failed !...")
+                # logging.info("The product has been removed...")
 
-        logging.info('Exit the update process')
+
+logging.info('Exit the update process')
