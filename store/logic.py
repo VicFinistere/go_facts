@@ -2,7 +2,6 @@
 This file contains all the app logic functions ( logic.py )
 """
 import re
-import base64
 import logging
 import requests
 from .models import Product, Favorite, User
@@ -86,8 +85,8 @@ def fetch_products_id(url):
     :param url: Page
     :return: products_id
     """
-    results = base64.b64encode(requests.get(url).content)
-    results = base64.b64encode(results).text
+    data = requests.get(url)
+    results = data.text
     products_id = re.findall(r'<a href="/produit/(\d+)/', results)
     return products_id
 
@@ -353,7 +352,7 @@ def search_substitutes(category, minimal_grade, product_code):
         while substitutes is None and 5 > i and 97 + i <= ord(minimal_grade) - 1:
             i += 1
             url = url_category_for_grade(category, grade=chr(nutrition_score + i))
-            substitutes = fetch_substitutes(base64.b64encode(url), product_code)
+            substitutes = fetch_substitutes(url, product_code)
         return substitutes
 
     else:
@@ -412,27 +411,24 @@ def url_category_for_grade(category, grade):
     Url category for grade
     :param category:
     :param grade:
-    :return: url
+    :return:
     """
 
-    url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process" \
-          "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
+    url = "https://fr.openfoodfacts.org/cgi/search.pl?action=process&" \
+          "tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
           "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
           "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
-          "&action=display".format(category.encode('utf8'), grade)
+          "&action=display".format(category, grade)
 
-    try:
-        return url.encode('utf8')
-
-    except ValueError:
-        return None
+    print(url)
+    return url
 
 
 def int_code(product_code):
     """
     Check if code is an integer for template
     :param product_code:
-    :return: int product code
+    :return:
     """
     if not isinstance(product_code, int):
         product_code = int(product_code)
