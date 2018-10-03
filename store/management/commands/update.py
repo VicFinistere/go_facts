@@ -1,6 +1,7 @@
 """
 Cron task to update products in database
 """
+import requests
 from django.core.management.base import BaseCommand
 # from django.core.management.base import CommandError
 # from polls.models import Question as Poll
@@ -29,8 +30,26 @@ class Command(BaseCommand):
                 logging.info("Deleting succeed !...")
 
                 try:
-                    logic.get_product(code)
-                    logging.info("Product has been updated !")
+                    page = "https://world.openfoodfacts.org/api/v0/product/{}.json".format(code)
+                    data = requests.get(page).json()
+
+                    if data:
+                        if data['product']:
+                            product = data['product']
+                            try:
+                                product_array = logic.fetch_product_array(product)
+
+                                if product_array is not None:
+                                    logic.save_product(product_array)
+                                else:
+                                    logging.info('Getting product array failed...')
+
+                            except IndexError:
+                                logging.info('Updating product have failed...')
+                        else:
+                            logging.info('No product found with the code {} ...'.format(code))
+                    else:
+                        logging.info('Getting product page failed...')
 
                 except ValueError:
                     logging.info("The product has been removed...")
@@ -38,4 +57,4 @@ class Command(BaseCommand):
             except ValueError:
                 logging.info("Deleting failed !...")
 
-        logging.info('Update is achived !')
+        logging.info('Exit the update process')
