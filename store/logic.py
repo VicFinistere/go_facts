@@ -418,10 +418,10 @@ def url_category_for_grade(category, grade):
           "&tagtype_0=categories&tag_contains_0=contains&tag_0={}" \
           "&tagtype_1=nutrition_grades&tag_contains_1=contains&tag_1={}" \
           "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
-          "&action=display".format(category, grade)
+          "&action=display".format(str(category, 'utf-8'), grade)
 
     try:
-        return url.encode('utf-8')
+        return url
 
     except ValueError:
         return None
