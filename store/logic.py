@@ -106,9 +106,11 @@ def save_product(product_array):
             categories=product_array[4],
             nutriments=product_array[5]
         )
+        logging.info("Success : Product in database !")
         return True
 
     except ValueError:
+        logging.info("Fail : Get or create product didn't work ...")
         return False
 
 
