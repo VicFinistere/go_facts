@@ -23,11 +23,11 @@ class Command(BaseCommand):
 
         for product in products:
             code = product.code
-            logging.info("Getting {}".format(code))
+            # logging.info("Getting {}".format(code))
 
             try:
                 product.delete()
-                logging.info("Deleting succeed !...")
+                # logging.info("Deleting succeed !...")
 
                 try:
                     page = "https://world.openfoodfacts.org/api/v0/product/{}.json".format(code)
@@ -42,19 +42,25 @@ class Command(BaseCommand):
                                 if product_array is not None:
                                     logic.save_product(product_array)
                                 else:
-                                    logging.info('Getting product array failed...')
+                                    pass
+                                    # logging.info('Getting product array failed...')
 
                             except IndexError:
-                                logging.info('Updating product have failed...')
+                                pass
+                                # logging.info('Updating product have failed...')
                         else:
-                            logging.info('No product found with the code {} ...'.format(code))
+                            pass
+                            # logging.info('No product found with the code {} ...'.format(code))
                     else:
-                        logging.info('Getting product page failed...')
+                        pass
+                        # logging.info('Getting product page failed...')
 
                 except ValueError:
-                    logging.info("The product has been removed...")
+                    pass
+                    # logging.info("The product has been removed...")
 
             except ValueError:
-                logging.info("Deleting failed !...")
+                pass
+                # logging.info("Deleting failed !...")
 
         logging.info('Exit the update process')
