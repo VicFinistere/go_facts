@@ -419,7 +419,6 @@ def url_category_for_grade(category, grade):
           "&sort_by=unique_scans_n&page_size=20&axis_x=energy&axis_y=products_n" \
           "&action=display".format(category, grade)
 
-    print(url)
     return url
 
 
